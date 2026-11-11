@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+🎓 UniSelect Ethiopia (የኢትዮጵያ ዩኒቨርሲቲዎች መረጃ ፖርታል)
+UniSelect Ethiopia is a modern, student-centric higher education discovery and score-matching web application designed for Grade 12 national exam candidates in Ethiopia. The platform aggregates comprehensive datasets for all 51+ Ethiopian public and specialized institutions, helping prospective university students make informed academic choices based on cut-off scores, campus locations, local community environments, direct Telegram channels, and embedded video tours.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌟 Key Features
+⚡ Score Matcher Engine: Input Grade 12 national exam scores and stream (Natural or Social Science) to instantly filter and match eligible public universities based on official Ministry of Education (MoE) cut-off requirements.
 
-Currently, two official plugins are available:
+🗺️ Complete 51+ University Directory: Includes full institutional profiles covering historical cut-offs, student population, establishment year, and climate conditions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+📹 Embedded YouTube Video Tours: Dynamic YouTube URL parsing (supporting standard, short youtu.be, and parameterized links) to render responsive 16:9 campus tour video players directly within card details panels.
 
-## React Compiler
+✈️ Official Telegram Channel Integration: Direct quick-access buttons to official Telegram channels for main and branch campuses (including JiT, BECO, JUCAVM, Agaro, and Health Sciences campuses).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+📍 Interactive Campus Mapping: Multiple campus location listings per university with phone contacts and direct Google Maps navigation links.
 
-## Expanding the ESLint configuration
+🎨 Dynamic Card Aesthetics: Card index-based gradient generation, custom rating badges, generation tag chips, and fallback 2-letter avatar badges when institutional logos fail to load.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔄 Hybrid Local & Live Data Architecture: Automatic caching in browser localStorage with options to toggle between offline cache mode and live dataset updates.
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+🏗️ Architecture & Technical Stack
+Frontend Framework: React 18+ with TypeScript
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Build Tool: Vite
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Styling & UI: Tailwind CSS v3/v4 with custom gradients, flex layouts, and glassmorphism backdrop blur (backdrop-blur-xs)
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Routing & Optimization:
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+React Router DOM v6+ Layout Architecture: Centralized RootLayout utilizing <Outlet/> for layout consistency.
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Code-Splitting & Lazy Loading: Pages dynamically loaded using React.lazy() and wrapped in <React.Suspense> boundaries with fallback UI loading spinners.
+
+State & Persistence: Custom React hooks (useUniversities) backed by localStorage persistence (ethiopia_uni_portal_integrated_v9).
+
+📁 Project Folder Structure
+Plaintext
+uni-select-ethiopia/
+├── public/
+│   ├── hero.png
+│   ├── favicon.ico
+│   └── logos/
+├── src/
+│   ├── components/
+│   │   ├── UniversityCard.tsx       # Expandable card with YouTube player & Telegram links
+│   │   ├── LoadingSpinner.tsx       # Suspense boundary fallback UI
+│   │   ├── DirectoryHeader.tsx      # Directory controls and dataset toggle
+│   │   └── Navbar.tsx               # Header navigation bar
+│   ├── layouts/
+│   │   └── RootLayout.tsx           # Global wrapper with Header, Footer & <Outlet />
+│   ├── pages/
+│   │   ├── Home.tsx                 # 2-column hero grid & featured institutions
+│   │   ├── Directory.tsx            # Full university directory & generation filter
+│   │   ├── Matcher.tsx              # Exam score matching calculator
+│   │   └── UniversityDetails.tsx    # Individual institutional page
+│   ├── data/
+│   │   └── localDatabase.ts         # Pre-populated dataset (51+ Ethiopian universities)
+│   ├── hooks/
+│   │   └── useUniversities.ts       # Storage syncing & dataset state management
+│   ├── types/
+│   │   └── university.ts            # TypeScript interfaces & type definitions
+│   ├── routes/
+│   │   └── AppRoutes.tsx            # Route configuration with React.lazy & Suspense
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+⚡ Getting Started
+Prerequisites
+Node.js (v18.0.0 or higher)
+
+pnpm (recommended), npm, or yarn
+
+Installation
+Clone the repository:
+
+Bash
+git clone https://github.com/your-username/uni-select-ethiopia.git
+cd uni-select-ethiopia
+Install dependencies:
+
+Bash
+pnpm install
+# or
+npm install
+Start the local development server:
+
+Bash
+pnpm dev
+# or
+npm run dev
+Open in Browser:
+Navigate to http://localhost:5173 to view the application.

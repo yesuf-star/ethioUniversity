@@ -120,8 +120,8 @@ export default function Home() {
 
   const totalCount = mergedUniversities.length;
   const popularUniversities = mergedUniversities
-    .filter((u) => u.isPopular || u.rating >= 4.7)
-    .slice(0, 3);
+        .filter((u) => u.isPopular || u.rating >= 4.7)
+        .slice(0, 3);
 
   return (
     <div className="space-y-12">
