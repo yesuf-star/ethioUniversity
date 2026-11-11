@@ -1,8 +1,9 @@
 {
   "name": "ethio-university-info",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
