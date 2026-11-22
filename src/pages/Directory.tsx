@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useUniversities } from "../hooks/useUniversities";
 import type { GenerationType } from "../types/university";
 import UniversityCard from "../components/UniversityCard";
+import UniversityCardSkeleton from "../components/UniversityCardSkeleton";
 
 type DataStoreMode = "INTEGRATED" | "PURE_API";
 
@@ -103,11 +104,10 @@ export default function Directory() {
       </div>
 
       {loading ? (
-        <div className="py-24 flex flex-col items-center justify-center space-y-4">
-          <div className="w-12 h-12 border-4 border-sky-200 border-t-sky-600 rounded-full animate-spin"></div>
-          <p className="text-sm font-bold text-slate-600 animate-pulse">
-            Loading university records...
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <UniversityCardSkeleton key={i} />
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

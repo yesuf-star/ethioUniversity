@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { useUniversities } from "../hooks/useUniversities";
 import type { StreamType, University } from "../types/university";
 import UniversityCard from "../components/UniversityCard";
+import { useAuth } from "../context/useAuth";
 
 export default function ScoreMatcher() {
   const { mergedUniversities } = useUniversities();
-  const [score, setScore] = useState<number | "">("");
-  const [stream, setStream] = useState<StreamType>("natural");
+  const { user } = useAuth();
+
+  const [score, setScore] = useState<number | "">(() => user?.score ?? "");
+  const [stream, setStream] = useState<StreamType>(
+    () => (user?.stream as StreamType) || "natural"
+  );
   const [matches, setMatches] = useState<University[]>([]);
   const [hasCalculated, setHasCalculated] = useState(false);
 
@@ -104,8 +109,8 @@ export default function ScoreMatcher() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {matches.map((uni) => (
-                <UniversityCard key={uni.id} university={uni} />
+              {matches.map((uni, idx) => (
+                <UniversityCard key={uni.id} university={uni} index={idx} />
               ))}
             </div>
           )}

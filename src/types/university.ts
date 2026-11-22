@@ -22,6 +22,17 @@ export interface CommunityContext {
   religiousFacilities: string[];
 }
 
+export interface CampusFacilities {
+  wifi: string;
+  waterSupply: string;
+  electricity: string;
+  dormitory: string;
+  cafeteria: string;
+  healthcare: string;
+  bankingAndTransport: string;
+  security: string;
+}
+
 export interface University {
   id: string;
   name: string;
@@ -42,6 +53,7 @@ export interface University {
   community: CommunityContext;
   campuses: CampusLocation[];
   videoUrl?: string;
+  facilities?: Partial<CampusFacilities>;
 }
 
 export interface ExternalApiUniversity {
